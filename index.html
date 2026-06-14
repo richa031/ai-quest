@@ -149,6 +149,8 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 32px 24px;
+      position: relative;
+      z-index: 1;
     }
 
     /* Hero Section */
@@ -639,59 +641,90 @@
       font-size: 0.8rem;
     }
 
-    /* Floating decorative blobs */
-    .blob {
+    /* ===== DECORATIVE BACKGROUND ===== */
+    .decorative-bg {
       position: fixed;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.4;
+      inset: 0;
       pointer-events: none;
-      z-index: -1;
+      z-index: 0;
+      overflow: hidden;
     }
 
-    .blob-1 {
-      width: 300px;
-      height: 300px;
-      background: #fce7f3;
-      top: 10%;
-      left: -100px;
-      animation: blob-float 8s ease-in-out infinite;
+    /* Floating Bubbles */
+    .bubble {
+      position: absolute;
+      bottom: -50px;
+      left: var(--left);
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background: radial-gradient(
+        circle at 30% 30%,
+        rgba(255, 255, 255, 0.5),
+        rgba(232, 180, 232, 0.15) 60%,
+        rgba(200, 150, 255, 0.05)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow:
+        inset 0 -2px 4px rgba(200, 150, 255, 0.1),
+        0 0 8px rgba(232, 180, 232, 0.1);
+      animation: float-up var(--duration) ease-in-out var(--delay) infinite;
+      will-change: transform;
     }
 
-    .blob-2 {
-      width: 250px;
-      height: 250px;
-      background: #f3e8ff;
-      top: 50%;
-      right: -80px;
-      animation: blob-float 10s ease-in-out infinite reverse;
+    @keyframes float-up {
+      0% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0;
+      }
+      10% { opacity: 0.6; }
+      50% {
+        transform: translateY(-50vh) translateX(20px) scale(1.05);
+        opacity: 0.4;
+      }
+      90% { opacity: 0; }
+      100% {
+        transform: translateY(-110vh) translateX(-10px) scale(0.9);
+        opacity: 0;
+      }
     }
 
-    .blob-3 {
-      width: 200px;
-      height: 200px;
-      background: #fce7f3;
-      bottom: 10%;
-      left: 30%;
-      animation: blob-float 12s ease-in-out infinite;
-    }
-
-    @keyframes blob-float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(20px, -20px) scale(1.05); }
-      66% { transform: translate(-10px, 15px) scale(0.95); }
-    }
-
-    /* Cute sparkle decoration */
+    /* Twinkling Sparkles */
     .sparkle {
       position: absolute;
-      pointer-events: none;
-      animation: sparkle-pulse 2s ease-in-out infinite;
+      left: var(--left);
+      top: var(--top);
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow:
+        0 0 4px rgba(232, 180, 232, 0.8),
+        0 0 8px rgba(200, 150, 255, 0.4);
+      animation: twinkle 3s ease-in-out var(--delay) infinite;
+      will-change: opacity, transform;
     }
 
-    @keyframes sparkle-pulse {
-      0%, 100% { opacity: 0.4; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.2); }
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    /* Reduce effects on mobile */
+    @media (max-width: 768px) {
+      .bubble:nth-child(n+5) { display: none; }
+      .sparkle:nth-child(n+6) { display: none; }
+    }
+
+    /* Accessibility: respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .bubble, .sparkle { animation: none; opacity: 0.15; }
     }
 
     @media (max-width: 480px) {
@@ -700,10 +733,27 @@
   </style>
 </head>
 <body>
-  <!-- Cute floating background blobs -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
+  <!-- Decorative floating bubbles + sparkles -->
+  <div class="decorative-bg" aria-hidden="true">
+    <div class="bubble" style="--size: 20px; --left: 8%; --delay: 0s; --duration: 12s;"></div>
+    <div class="bubble" style="--size: 35px; --left: 22%; --delay: 2s; --duration: 15s;"></div>
+    <div class="bubble" style="--size: 15px; --left: 38%; --delay: 4s; --duration: 10s;"></div>
+    <div class="bubble" style="--size: 28px; --left: 52%; --delay: 1s; --duration: 14s;"></div>
+    <div class="bubble" style="--size: 32px; --left: 68%; --delay: 3s; --duration: 13s;"></div>
+    <div class="bubble" style="--size: 18px; --left: 82%; --delay: 5s; --duration: 11s;"></div>
+    <div class="bubble" style="--size: 24px; --left: 15%; --delay: 6s; --duration: 16s;"></div>
+    <div class="bubble" style="--size: 26px; --left: 90%; --delay: 7s; --duration: 12s;"></div>
+    <div class="sparkle" style="--left: 5%; --top: 20%; --delay: 0s;"></div>
+    <div class="sparkle" style="--left: 18%; --top: 55%; --delay: 1.5s;"></div>
+    <div class="sparkle" style="--left: 32%; --top: 30%; --delay: 3s;"></div>
+    <div class="sparkle" style="--left: 48%; --top: 12%; --delay: 0.8s;"></div>
+    <div class="sparkle" style="--left: 62%; --top: 72%; --delay: 2.2s;"></div>
+    <div class="sparkle" style="--left: 78%; --top: 40%; --delay: 4s;"></div>
+    <div class="sparkle" style="--left: 88%; --top: 22%; --delay: 1s;"></div>
+    <div class="sparkle" style="--left: 42%; --top: 82%; --delay: 3.5s;"></div>
+    <div class="sparkle" style="--left: 72%; --top: 58%; --delay: 2.8s;"></div>
+    <div class="sparkle" style="--left: 25%; --top: 88%; --delay: 4.5s;"></div>
+  </div>
 
   <header class="header">
     <div class="header-left">
