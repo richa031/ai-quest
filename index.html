@@ -7,23 +7,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #12121a;
-      --bg-tertiary: #1a1a2e;
-      --bg-card: #16161f;
-      --accent-primary: #7c3aed;
-      --accent-secondary: #06b6d4;
+      --bg-primary: #fdf2f8;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #fce7f3;
+      --bg-card: #fff1f7;
+      --accent-primary: #ec4899;
+      --accent-secondary: #a855f7;
       --accent-gold: #f59e0b;
       --accent-success: #10b981;
-      --accent-locked: #374151;
+      --accent-locked: #d1d5db;
       --accent-danger: #ef4444;
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --text-muted: #64748b;
-      --border: #1e293b;
-      --glow-purple: 0 0 20px rgba(124, 58, 237, 0.3);
-      --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.3);
-      --glow-gold: 0 0 20px rgba(245, 158, 11, 0.3);
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --border: #f3d4e8;
+      --glow-purple: 0 0 20px rgba(236, 72, 153, 0.25);
+      --glow-cyan: 0 0 20px rgba(168, 85, 247, 0.25);
+      --glow-gold: 0 0 20px rgba(245, 158, 11, 0.25);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,7 +41,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(10, 10, 15, 0.95);
+      background: rgba(253, 242, 248, 0.95);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
       padding: 12px 24px;
@@ -62,7 +62,7 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.4rem;
       font-weight: 700;
-      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      background: linear-gradient(135deg, #ec4899, #a855f7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -72,10 +72,10 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: var(--bg-tertiary);
+      background: linear-gradient(135deg, #fce7f3, #f3e8ff);
       padding: 6px 14px;
       border-radius: 20px;
-      border: 1px solid var(--accent-primary);
+      border: 1px solid #f9a8d4;
       font-size: 0.85rem;
       font-weight: 500;
     }
@@ -110,7 +110,7 @@
 
     .xp-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      background: linear-gradient(90deg, #ec4899, #a855f7);
       border-radius: 4px;
       transition: width 0.5s ease;
     }
@@ -156,15 +156,23 @@
       text-align: center;
       margin-bottom: 48px;
       padding: 40px 24px;
-      background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
-      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.06) 0%, rgba(168, 85, 247, 0.06) 100%);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .hero-deco {
+      font-size: 1rem;
+      color: #f9a8d4;
+      margin-bottom: 12px;
+      letter-spacing: 4px;
     }
 
     .hero h1 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 2.2rem;
       margin-bottom: 8px;
-      background: linear-gradient(135deg, var(--text-primary), var(--accent-secondary));
+      background: linear-gradient(135deg, #ec4899, #a855f7);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -191,7 +199,7 @@
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.8rem;
       font-weight: 700;
-      color: var(--accent-secondary);
+      color: var(--accent-primary);
     }
 
     .stat-label {
@@ -206,8 +214,9 @@
       margin-bottom: 40px;
       padding: 20px;
       background: var(--bg-secondary);
-      border-radius: 12px;
+      border-radius: 16px;
       border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(236, 72, 153, 0.06);
     }
 
     .overall-progress-header {
@@ -225,7 +234,7 @@
     .overall-progress-header span {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.85rem;
-      color: var(--accent-secondary);
+      color: var(--accent-primary);
     }
 
     .overall-bar {
@@ -237,7 +246,7 @@
 
     .overall-bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-success));
+      background: linear-gradient(90deg, #ec4899, #a855f7, #10b981);
       border-radius: 6px;
       transition: width 0.8s ease;
     }
@@ -246,10 +255,11 @@
     .level-section {
       margin-bottom: 32px;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 18px;
       overflow: hidden;
       background: var(--bg-secondary);
       transition: border-color 0.3s;
+      box-shadow: 0 2px 12px rgba(236, 72, 153, 0.04);
     }
 
     .level-section.current {
@@ -288,24 +298,24 @@
     .level-icon {
       width: 44px;
       height: 44px;
-      border-radius: 12px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.3rem;
       background: var(--bg-tertiary);
-      border: 2px solid var(--accent-locked);
+      border: 2px solid #f9a8d4;
       flex-shrink: 0;
     }
 
     .level-section.current .level-icon {
       border-color: var(--accent-primary);
-      box-shadow: var(--glow-purple);
+      box-shadow: 0 0 12px rgba(236, 72, 153, 0.3);
     }
 
     .level-section.completed .level-icon {
       border-color: var(--accent-success);
-      background: rgba(16, 185, 129, 0.1);
+      background: rgba(16, 185, 129, 0.08);
     }
 
     .level-title {
@@ -356,19 +366,20 @@
       padding: 16px;
       margin-bottom: 12px;
       background: var(--bg-primary);
-      border-radius: 10px;
+      border-radius: 14px;
       border: 1px solid var(--border);
       transition: all 0.2s;
     }
 
     .quest-item:hover {
-      border-color: var(--accent-primary);
+      border-color: #f9a8d4;
       transform: translateX(4px);
+      box-shadow: 0 4px 16px rgba(236, 72, 153, 0.08);
     }
 
     .quest-item.completed {
       border-color: var(--accent-success);
-      background: rgba(16, 185, 129, 0.03);
+      background: rgba(16, 185, 129, 0.04);
     }
 
     .quest-header {
@@ -381,8 +392,8 @@
     .quest-checkbox {
       width: 22px;
       height: 22px;
-      border-radius: 6px;
-      border: 2px solid var(--accent-locked);
+      border-radius: 50%;
+      border: 2px solid #f9a8d4;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -393,11 +404,12 @@
 
     .quest-checkbox:hover {
       border-color: var(--accent-primary);
+      background: rgba(236, 72, 153, 0.08);
     }
 
     .quest-item.completed .quest-checkbox {
-      background: var(--accent-success);
-      border-color: var(--accent-success);
+      background: linear-gradient(135deg, #ec4899, #a855f7);
+      border-color: #ec4899;
     }
 
     .quest-checkbox::after {
@@ -424,10 +436,10 @@
     .quest-xp {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
-      color: var(--accent-gold);
-      background: rgba(245, 158, 11, 0.1);
-      padding: 3px 8px;
-      border-radius: 10px;
+      color: #a855f7;
+      background: rgba(168, 85, 247, 0.1);
+      padding: 3px 10px;
+      border-radius: 12px;
     }
 
     .quest-topics {
@@ -447,11 +459,11 @@
     .resource-link {
       font-size: 0.75rem;
       padding: 4px 10px;
-      background: var(--bg-tertiary);
-      border-radius: 6px;
-      color: var(--accent-secondary);
+      background: linear-gradient(135deg, rgba(236, 72, 153, 0.05), rgba(168, 85, 247, 0.05));
+      border-radius: 10px;
+      color: #a855f7;
       text-decoration: none;
-      border: 1px solid transparent;
+      border: 1px solid #f3d4e8;
       transition: all 0.2s;
       display: inline-flex;
       align-items: center;
@@ -459,8 +471,9 @@
     }
 
     .resource-link:hover {
-      border-color: var(--accent-secondary);
-      background: rgba(6, 182, 212, 0.1);
+      border-color: #a855f7;
+      background: rgba(168, 85, 247, 0.08);
+      transform: translateY(-1px);
     }
 
     .resource-link .icon {
@@ -519,7 +532,7 @@
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.4);
       z-index: 10000;
       align-items: center;
       justify-content: center;
@@ -528,13 +541,13 @@
     .modal-overlay.show { display: flex; }
 
     .modal {
-      background: var(--bg-secondary);
-      border: 2px solid var(--accent-gold);
-      border-radius: 16px;
+      background: #ffffff;
+      border: 2px solid #f9a8d4;
+      border-radius: 24px;
       padding: 40px;
       text-align: center;
       max-width: 400px;
-      box-shadow: var(--glow-gold);
+      box-shadow: 0 20px 60px rgba(236, 72, 153, 0.15);
       animation: modal-pop 0.4s ease;
     }
 
@@ -546,7 +559,7 @@
     .modal h2 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.8rem;
-      color: var(--accent-gold);
+      color: #ec4899;
       margin-bottom: 8px;
     }
 
@@ -556,11 +569,11 @@
     }
 
     .modal-btn {
-      background: var(--accent-primary);
+      background: linear-gradient(135deg, #ec4899, #a855f7);
       color: white;
       border: none;
       padding: 10px 24px;
-      border-radius: 8px;
+      border-radius: 14px;
       cursor: pointer;
       font-weight: 600;
       font-size: 1rem;
@@ -573,16 +586,16 @@
       position: fixed;
       top: 80px;
       right: 24px;
-      background: var(--bg-secondary);
-      border: 1px solid var(--accent-gold);
+      background: #ffffff;
+      border: 1px solid #f9a8d4;
       padding: 12px 20px;
-      border-radius: 10px;
+      border-radius: 14px;
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
-      color: var(--accent-gold);
+      color: #ec4899;
       z-index: 9999;
       animation: toast-in 0.3s ease, toast-out 0.3s ease 1.5s forwards;
-      box-shadow: var(--glow-gold);
+      box-shadow: 0 4px 20px rgba(236, 72, 153, 0.15);
     }
 
     @keyframes toast-in {
@@ -620,10 +633,65 @@
     .mobile-stats {
       display: none;
       padding: 10px 16px;
-      background: var(--bg-secondary);
+      background: #ffffff;
       border-bottom: 1px solid var(--border);
       justify-content: space-around;
       font-size: 0.8rem;
+    }
+
+    /* Floating decorative blobs */
+    .blob {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .blob-1 {
+      width: 300px;
+      height: 300px;
+      background: #fce7f3;
+      top: 10%;
+      left: -100px;
+      animation: blob-float 8s ease-in-out infinite;
+    }
+
+    .blob-2 {
+      width: 250px;
+      height: 250px;
+      background: #f3e8ff;
+      top: 50%;
+      right: -80px;
+      animation: blob-float 10s ease-in-out infinite reverse;
+    }
+
+    .blob-3 {
+      width: 200px;
+      height: 200px;
+      background: #fce7f3;
+      bottom: 10%;
+      left: 30%;
+      animation: blob-float 12s ease-in-out infinite;
+    }
+
+    @keyframes blob-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -20px) scale(1.05); }
+      66% { transform: translate(-10px, 15px) scale(0.95); }
+    }
+
+    /* Cute sparkle decoration */
+    .sparkle {
+      position: absolute;
+      pointer-events: none;
+      animation: sparkle-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle-pulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.2); }
     }
 
     @media (max-width: 480px) {
@@ -632,6 +700,11 @@
   </style>
 </head>
 <body>
+  <!-- Cute floating background blobs -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
   <header class="header">
     <div class="header-left">
       <div class="logo">AI Quest</div>
@@ -661,8 +734,9 @@
 
   <main class="main-container">
     <section class="hero">
+      <div class="hero-deco">✿ ⋆ ˚｡⋆୨♡୧⋆ ˚｡⋆ ✿</div>
       <h1>Your AI Mastery Journey</h1>
-      <p class="subtitle">From Python basics to building AI agents — one quest at a time</p>
+      <p class="subtitle">From Python basics to building AI agents — one quest at a time 🌸</p>
       <div class="stats-row">
         <div class="stat-item">
           <div class="stat-value" id="stat-completed">0</div>
@@ -1369,17 +1443,25 @@
     // === CELEBRATIONS ===
     function triggerConfetti() {
       const container = document.getElementById('confetti-container');
-      const colors = ['#7c3aed', '#06b6d4', '#f59e0b', '#10b981', '#ef4444', '#ec4899'];
+      const colors = ['#ec4899', '#a855f7', '#f9a8d4', '#c084fc', '#f472b6', '#e879f9'];
+      const shapes = ['♡', '✿', '⋆', '♪', '∗'];
       for (let i = 0; i < 30; i++) {
         const piece = document.createElement('div');
         piece.className = 'confetti-piece';
         piece.style.left = Math.random() * 100 + '%';
-        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
         piece.style.animationDelay = Math.random() * 0.5 + 's';
         piece.style.animationDuration = (2 + Math.random() * 2) + 's';
-        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        piece.style.width = (6 + Math.random() * 8) + 'px';
-        piece.style.height = (6 + Math.random() * 8) + 'px';
+        if (Math.random() > 0.5) {
+          piece.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+          piece.style.fontSize = (12 + Math.random() * 14) + 'px';
+          piece.style.color = colors[Math.floor(Math.random() * colors.length)];
+          piece.style.background = 'none';
+        } else {
+          piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+          piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+          piece.style.width = (6 + Math.random() * 8) + 'px';
+          piece.style.height = (6 + Math.random() * 8) + 'px';
+        }
         container.appendChild(piece);
         setTimeout(() => piece.remove(), 4000);
       }
