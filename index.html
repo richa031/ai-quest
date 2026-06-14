@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Quest - Your Journey to AI Mastery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-tertiary: #1a1a2e;
+      --bg-card: #16161f;
+      --accent-primary: #7c3aed;
+      --accent-secondary: #06b6d4;
+      --accent-gold: #f59e0b;
+      --accent-success: #10b981;
+      --accent-locked: #374151;
+      --accent-danger: #ef4444;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border: #1e293b;
+      --glow-purple: 0 0 20px rgba(124, 58, 237, 0.3);
+      --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.3);
+      --glow-gold: 0 0 20px rgba(245, 158, 11, 0.3);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .level-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-tertiary);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--accent-primary);
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .level-badge .level-num {
+      color: var(--accent-primary);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .xp-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 200px;
+    }
+
+    .xp-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      overflow: hidden;
+      min-width: 120px;
+    }
+
+    .xp-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .xp-text {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+
+    .streak-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: var(--bg-tertiary);
+      border-radius: 16px;
+      font-size: 0.85rem;
+      border: 1px solid transparent;
+    }
+
+    .streak-badge.active {
+      border-color: var(--accent-gold);
+      box-shadow: var(--glow-gold);
+    }
+
+    .streak-num {
+      font-weight: 700;
+      color: var(--accent-gold);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* Main Layout */
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+      padding: 40px 24px;
+      background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.08) 0%, transparent 70%);
+      border-radius: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--text-primary), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 24px;
+    }
+
+    .stats-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Progress Overview */
+    .overall-progress {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .overall-progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .overall-progress-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+    }
+
+    .overall-progress-header span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-secondary);
+    }
+
+    .overall-bar {
+      height: 12px;
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .overall-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-success));
+      border-radius: 6px;
+      transition: width 0.8s ease;
+    }
+
+    /* Level Sections */
+    .level-section {
+      margin-bottom: 32px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-secondary);
+      transition: border-color 0.3s;
+    }
+
+    .level-section.current {
+      border-color: var(--accent-primary);
+      box-shadow: var(--glow-purple);
+    }
+
+    .level-section.completed {
+      border-color: var(--accent-success);
+    }
+
+    .level-section.locked {
+      opacity: 0.5;
+    }
+
+    .level-header {
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .level-header:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .level-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .level-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      background: var(--bg-tertiary);
+      border: 2px solid var(--accent-locked);
+      flex-shrink: 0;
+    }
+
+    .level-section.current .level-icon {
+      border-color: var(--accent-primary);
+      box-shadow: var(--glow-purple);
+    }
+
+    .level-section.completed .level-icon {
+      border-color: var(--accent-success);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .level-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .level-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .level-header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .level-progress-mini {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .chevron {
+      color: var(--text-muted);
+      transition: transform 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .level-section.expanded .chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Quest List */
+    .quest-list {
+      display: none;
+      padding: 0 24px 24px;
+    }
+
+    .level-section.expanded .quest-list {
+      display: block;
+    }
+
+    .quest-item {
+      padding: 16px;
+      margin-bottom: 12px;
+      background: var(--bg-primary);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+
+    .quest-item:hover {
+      border-color: var(--accent-primary);
+      transform: translateX(4px);
+    }
+
+    .quest-item.completed {
+      border-color: var(--accent-success);
+      background: rgba(16, 185, 129, 0.03);
+    }
+
+    .quest-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .quest-checkbox {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--accent-locked);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .quest-checkbox:hover {
+      border-color: var(--accent-primary);
+    }
+
+    .quest-item.completed .quest-checkbox {
+      background: var(--accent-success);
+      border-color: var(--accent-success);
+    }
+
+    .quest-checkbox::after {
+      content: '';
+      display: none;
+      width: 6px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      margin-bottom: 2px;
+    }
+
+    .quest-item.completed .quest-checkbox::after {
+      display: block;
+    }
+
+    .quest-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+
+    .quest-xp {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent-gold);
+      background: rgba(245, 158, 11, 0.1);
+      padding: 3px 8px;
+      border-radius: 10px;
+    }
+
+    .quest-topics {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      padding-left: 34px;
+    }
+
+    .quest-resources {
+      padding-left: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .resource-link {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      color: var(--accent-secondary);
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .resource-link:hover {
+      border-color: var(--accent-secondary);
+      background: rgba(6, 182, 212, 0.1);
+    }
+
+    .resource-link .icon {
+      font-size: 0.7rem;
+    }
+
+    /* Reset Button */
+    .reset-section {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+    }
+
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--accent-danger);
+      color: var(--accent-danger);
+      padding: 8px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      background: rgba(239, 68, 68, 0.1);
+    }
+
+    /* Confetti */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      opacity: 0;
+      animation: confetti-fall 3s ease-in forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* Level Up Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.show { display: flex; }
+
+    .modal {
+      background: var(--bg-secondary);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: var(--glow-gold);
+      animation: modal-pop 0.4s ease;
+    }
+
+    @keyframes modal-pop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .modal h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      margin-bottom: 8px;
+    }
+
+    .modal p {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .modal-btn {
+      background: var(--accent-primary);
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .modal-btn:hover { opacity: 0.9; }
+
+    /* XP Toast */
+    .xp-toast {
+      position: fixed;
+      top: 80px;
+      right: 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--accent-gold);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      z-index: 9999;
+      animation: toast-in 0.3s ease, toast-out 0.3s ease 1.5s forwards;
+      box-shadow: var(--glow-gold);
+    }
+
+    @keyframes toast-in {
+      from { transform: translateX(100px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes toast-out {
+      from { opacity: 1; }
+      to { opacity: 0; transform: translateY(-20px); }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .header { padding: 10px 16px; }
+      .header-left { gap: 10px; }
+      .logo { font-size: 1.1rem; }
+      .xp-bar-container { min-width: 140px; }
+      .main-container { padding: 20px 16px; }
+      .hero h1 { font-size: 1.6rem; }
+      .stats-row { gap: 20px; }
+      .level-header { padding: 16px; }
+      .quest-list { padding: 0 16px 16px; }
+      .quest-resources { flex-direction: column; }
+      .hero { padding: 24px 16px; }
+    }
+
+    @media (max-width: 480px) {
+      .header-right { display: none; }
+      .level-badge { font-size: 0.75rem; padding: 4px 10px; }
+      .xp-bar-container { display: none; }
+    }
+
+    /* Mobile stats bar */
+    .mobile-stats {
+      display: none;
+      padding: 10px 16px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      justify-content: space-around;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .mobile-stats { display: flex; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <div class="logo">AI Quest</div>
+      <div class="level-badge">
+        <span class="level-num" id="header-level">Lv 1</span>
+        <span id="header-title">Curious Observer</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="xp-bar-container">
+        <div class="xp-bar"><div class="xp-bar-fill" id="header-xp-bar" style="width: 0%"></div></div>
+        <span class="xp-text" id="header-xp-text">0 / 50 XP</span>
+      </div>
+      <div class="streak-badge" id="streak-badge">
+        <span>🔥</span>
+        <span class="streak-num" id="streak-num">0</span>
+        <span>day streak</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-stats">
+    <span>🔥 <span id="mobile-streak">0</span> days</span>
+    <span>⚡ <span id="mobile-xp">0</span> XP</span>
+    <span>📊 <span id="mobile-progress">0</span>%</span>
+  </div>
+
+  <main class="main-container">
+    <section class="hero">
+      <h1>Your AI Mastery Journey</h1>
+      <p class="subtitle">From Python basics to building AI agents — one quest at a time</p>
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-completed">0</div>
+          <div class="stat-label">Quests Done</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-total">0</div>
+          <div class="stat-label">Total Quests</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-xp">0</div>
+          <div class="stat-label">Total XP</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-streak">0</div>
+          <div class="stat-label">Best Streak</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="overall-progress">
+      <div class="overall-progress-header">
+        <h3>Overall Progress</h3>
+        <span id="overall-pct">0%</span>
+      </div>
+      <div class="overall-bar">
+        <div class="overall-bar-fill" id="overall-bar-fill" style="width: 0%"></div>
+      </div>
+    </section>
+
+    <div id="levels-container"></div>
+
+    <section class="reset-section">
+      <button class="reset-btn" onclick="resetProgress()">Reset All Progress</button>
+    </section>
+  </main>
+
+  <div class="confetti-container" id="confetti-container"></div>
+  <div class="modal-overlay" id="level-up-modal">
+    <div class="modal">
+      <h2 id="modal-title">⚡ Level Up!</h2>
+      <p id="modal-text">You've reached a new level!</p>
+      <button class="modal-btn" onclick="closeModal()">Continue Quest</button>
+    </div>
+  </div>
+
+  <script>
+    // === CURRICULUM DATA ===
+    const LEVELS = [
+      {
+        id: 1, title: "Python Foundations", icon: "🐍",
+        subtitle: "The language of AI — get comfortable with Python's data tools",
+        quests: [
+          {
+            id: "1-1", title: "Python Refresher", xp: 15,
+            topics: "Data types, functions, OOP basics, list comprehensions, file I/O",
+            resources: [
+              { title: "FreeCodeCamp Python Full Course", url: "https://www.youtube.com/watch?v=rfscVS0vtbw", type: "video" },
+              { title: "Corey Schafer Python Tutorials", url: "https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU", type: "playlist" }
+            ]
+          },
+          {
+            id: "1-2", title: "NumPy", xp: 20,
+            topics: "Arrays, broadcasting, indexing/slicing, vectorized operations, linear algebra ops",
+            resources: [
+              { title: "FreeCodeCamp NumPy Tutorial", url: "https://www.youtube.com/watch?v=QUT1VHiLmmI", type: "video" },
+              { title: "NumPy Official Quickstart", url: "https://numpy.org/doc/stable/user/quickstart.html", type: "docs" },
+              { title: "Keith Galli NumPy Complete", url: "https://www.youtube.com/watch?v=GB9ByFAIAH4", type: "video" }
+            ]
+          },
+          {
+            id: "1-3", title: "Pandas", xp: 25,
+            topics: "DataFrames, Series, groupby, merging, handling missing data, apply/map",
+            resources: [
+              { title: "Corey Schafer Pandas Tutorials", url: "https://www.youtube.com/playlist?list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS", type: "playlist" },
+              { title: "Kaggle Pandas Micro-Course", url: "https://www.kaggle.com/learn/pandas", type: "course" },
+              { title: "Keith Galli Pandas Complete", url: "https://www.youtube.com/watch?v=vmEHCJofslg", type: "video" }
+            ]
+          },
+          {
+            id: "1-4", title: "Data Visualization", xp: 20,
+            topics: "Matplotlib, Seaborn — line plots, scatter, histograms, heatmaps, subplots",
+            resources: [
+              { title: "Corey Schafer Matplotlib", url: "https://www.youtube.com/playlist?list=PL-osiE80TeTvipOqomVEeZ1HRrcEvtZB_", type: "playlist" },
+              { title: "Kaggle Data Visualization", url: "https://www.kaggle.com/learn/data-visualization", type: "course" }
+            ]
+          },
+          {
+            id: "1-5", title: "Jupyter & Google Colab", xp: 10,
+            topics: "Notebook environment, markdown cells, magic commands, free GPU",
+            resources: [
+              { title: "Google Colab", url: "https://colab.research.google.com/", type: "tool" },
+              { title: "Corey Schafer Jupyter Tutorial", url: "https://www.youtube.com/watch?v=HW29067qVWk", type: "video" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 2, title: "Mathematics for AI", icon: "📐",
+        subtitle: "The secret sauce — linear algebra, calculus, and probability",
+        quests: [
+          {
+            id: "2-1", title: "Linear Algebra", xp: 30,
+            topics: "Vectors, matrices, dot product, eigenvalues, transformations, vector spaces",
+            resources: [
+              { title: "3Blue1Brown - Essence of Linear Algebra", url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab", type: "playlist" },
+              { title: "Khan Academy Linear Algebra", url: "https://www.khanacademy.org/math/linear-algebra", type: "course" }
+            ]
+          },
+          {
+            id: "2-2", title: "Calculus & Gradients", xp: 30,
+            topics: "Derivatives, partial derivatives, chain rule, gradient descent intuition",
+            resources: [
+              { title: "3Blue1Brown - Essence of Calculus", url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr", type: "playlist" },
+              { title: "Khan Academy Multivariable Calculus", url: "https://www.khanacademy.org/math/multivariable-calculus", type: "course" }
+            ]
+          },
+          {
+            id: "2-3", title: "Probability & Statistics", xp: 30,
+            topics: "Distributions, Bayes theorem, expectation, variance, hypothesis testing",
+            resources: [
+              { title: "StatQuest Statistics Fundamentals", url: "https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9", type: "playlist" },
+              { title: "3Blue1Brown Bayes Theorem", url: "https://www.youtube.com/watch?v=HZGCoVF3YvM", type: "video" },
+              { title: "Khan Academy Statistics", url: "https://www.khanacademy.org/math/statistics-probability", type: "course" }
+            ]
+          },
+          {
+            id: "2-4", title: "Applied Math for ML", xp: 25,
+            topics: "Connecting math to ML — cost functions, optimization, gradient descent",
+            resources: [
+              { title: "Mathematics for ML (free book)", url: "https://mml-book.github.io/", type: "docs" },
+              { title: "StatQuest ML playlist", url: "https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF", type: "playlist" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 3, title: "Machine Learning Fundamentals", icon: "🤖",
+        subtitle: "Classical ML algorithms — the backbone of data science",
+        quests: [
+          {
+            id: "3-1", title: "Core ML Concepts", xp: 25,
+            topics: "Types of learning, train/test split, bias-variance tradeoff, overfitting",
+            resources: [
+              { title: "Andrew Ng ML Specialization (Coursera free audit)", url: "https://www.coursera.org/specializations/machine-learning-introduction", type: "course" },
+              { title: "Google ML Crash Course", url: "https://developers.google.com/machine-learning/crash-course", type: "course" },
+              { title: "StatQuest ML Fundamentals", url: "https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF", type: "playlist" }
+            ]
+          },
+          {
+            id: "3-2", title: "Regression", xp: 25,
+            topics: "Linear regression, polynomial regression, regularization (L1/L2), gradient descent",
+            resources: [
+              { title: "StatQuest Linear Regression", url: "https://www.youtube.com/watch?v=PaFPbb66DxQ", type: "video" },
+              { title: "Sentdex ML with Python", url: "https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v", type: "playlist" }
+            ]
+          },
+          {
+            id: "3-3", title: "Classification", xp: 30,
+            topics: "Logistic regression, decision trees, random forests, SVMs, KNN, naive Bayes",
+            resources: [
+              { title: "StatQuest Decision Trees", url: "https://www.youtube.com/watch?v=_L39rN6gz7Y", type: "video" },
+              { title: "StatQuest Random Forests", url: "https://www.youtube.com/watch?v=J4Wdy0Wc_xQ", type: "video" },
+              { title: "StatQuest SVM", url: "https://www.youtube.com/watch?v=efR1C6CvhmE", type: "video" }
+            ]
+          },
+          {
+            id: "3-4", title: "Unsupervised Learning", xp: 25,
+            topics: "K-means, hierarchical clustering, DBSCAN, PCA, dimensionality reduction",
+            resources: [
+              { title: "StatQuest PCA", url: "https://www.youtube.com/watch?v=FgakZw6K1QQ", type: "video" },
+              { title: "StatQuest K-means", url: "https://www.youtube.com/watch?v=4b5d3muPQmA", type: "video" }
+            ]
+          },
+          {
+            id: "3-5", title: "Model Evaluation", xp: 25,
+            topics: "Precision, recall, F1, ROC-AUC, confusion matrix, cross-validation",
+            resources: [
+              { title: "StatQuest ROC and AUC", url: "https://www.youtube.com/watch?v=4jRBRDbJemM", type: "video" },
+              { title: "StatQuest Cross Validation", url: "https://www.youtube.com/watch?v=fSytzGwwBVw", type: "video" },
+              { title: "Scikit-learn User Guide", url: "https://scikit-learn.org/stable/user_guide.html", type: "docs" }
+            ]
+          },
+          {
+            id: "3-6", title: "Scikit-learn Mastery", xp: 20,
+            topics: "Pipeline API, preprocessing, feature engineering, GridSearchCV",
+            resources: [
+              { title: "Scikit-learn Official Tutorials", url: "https://scikit-learn.org/stable/tutorial/index.html", type: "docs" },
+              { title: "Kaggle Intro to ML", url: "https://www.kaggle.com/learn/intro-to-machine-learning", type: "course" },
+              { title: "Kaggle Intermediate ML", url: "https://www.kaggle.com/learn/intermediate-machine-learning", type: "course" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 4, title: "Deep Learning", icon: "🧠",
+        subtitle: "Neural networks, CNNs, RNNs, and the mighty Transformer",
+        quests: [
+          {
+            id: "4-1", title: "Neural Network Fundamentals", xp: 35,
+            topics: "Perceptrons, activation functions, backpropagation, loss functions, optimizers",
+            resources: [
+              { title: "3Blue1Brown Neural Networks", url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi", type: "playlist" },
+              { title: "Andrew Ng Deep Learning Specialization", url: "https://www.coursera.org/specializations/deep-learning", type: "course" },
+              { title: "Karpathy - Neural Nets: Zero to Hero", url: "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ", type: "playlist" }
+            ]
+          },
+          {
+            id: "4-2", title: "PyTorch", xp: 30,
+            topics: "Tensors, autograd, nn.Module, DataLoaders, training loops, GPU usage",
+            resources: [
+              { title: "PyTorch Official Tutorials", url: "https://pytorch.org/tutorials/beginner/basics/intro.html", type: "docs" },
+              { title: "FreeCodeCamp PyTorch for Deep Learning", url: "https://www.youtube.com/watch?v=V_xro1bcAuA", type: "video" },
+              { title: "Learn PyTorch (Daniel Bourke)", url: "https://www.learnpytorch.io/", type: "course" }
+            ]
+          },
+          {
+            id: "4-3", title: "CNNs (Computer Vision)", xp: 30,
+            topics: "Convolutions, pooling, feature maps, ResNet, transfer learning",
+            resources: [
+              { title: "Stanford CS231n Lectures", url: "https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv", type: "playlist" },
+              { title: "Sentdex CNNs with PyTorch", url: "https://www.youtube.com/playlist?list=PLQVvvaa0QuDdeMyHEYc0gxFpYwHY2Qfdh", type: "playlist" }
+            ]
+          },
+          {
+            id: "4-4", title: "RNNs & Sequence Models", xp: 25,
+            topics: "Vanilla RNNs, vanishing gradients, LSTMs, GRUs, seq2seq",
+            resources: [
+              { title: "StatQuest RNN/LSTM", url: "https://www.youtube.com/watch?v=AsNTP8Kwu80", type: "video" },
+              { title: "Karpathy - Unreasonable Effectiveness of RNNs", url: "http://karpathy.github.io/2015/05/21/rnn-effectiveness/", type: "docs" }
+            ]
+          },
+          {
+            id: "4-5", title: "Transformers & Attention", xp: 40,
+            topics: "Self-attention, multi-head attention, positional encoding, BERT, GPT",
+            resources: [
+              { title: "Karpathy - Let's Build GPT", url: "https://www.youtube.com/watch?v=kCc8FmEb1nY", type: "video" },
+              { title: "3Blue1Brown - Attention in Transformers", url: "https://www.youtube.com/watch?v=eMlx5fFNoYc", type: "video" },
+              { title: "Jay Alammar - Illustrated Transformer", url: "https://jalammar.github.io/illustrated-transformer/", type: "docs" },
+              { title: "Hugging Face NLP Course", url: "https://huggingface.co/learn/nlp-course", type: "course" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 5, title: "Natural Language Processing", icon: "📝",
+        subtitle: "Teaching machines to understand and generate human language",
+        quests: [
+          {
+            id: "5-1", title: "Text Preprocessing", xp: 20,
+            topics: "Tokenization, stemming, TF-IDF, bag of words, Word2Vec, GloVe",
+            resources: [
+              { title: "FreeCodeCamp NLP with Python", url: "https://www.youtube.com/watch?v=fOvTtapxa9c", type: "video" },
+              { title: "Kaggle NLP Micro-Course", url: "https://www.kaggle.com/learn/natural-language-processing", type: "course" },
+              { title: "NLTK Book (free)", url: "https://www.nltk.org/book/", type: "docs" }
+            ]
+          },
+          {
+            id: "5-2", title: "Modern NLP with Transformers", xp: 35,
+            topics: "Hugging Face library, pre-trained models, fine-tuning, text classification, NER",
+            resources: [
+              { title: "Hugging Face NLP Course", url: "https://huggingface.co/learn/nlp-course", type: "course" },
+              { title: "Hugging Face Docs", url: "https://huggingface.co/docs/transformers", type: "docs" }
+            ]
+          },
+          {
+            id: "5-3", title: "Text Classification Project", xp: 30,
+            topics: "End-to-end text classifier, fine-tuning BERT, evaluation pipeline",
+            resources: [
+              { title: "HF Fine-tuning Tutorial", url: "https://huggingface.co/docs/transformers/training", type: "docs" },
+              { title: "Kaggle NLP Competitions", url: "https://www.kaggle.com/competitions?hostSegmentIdFilter=5", type: "tool" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 6, title: "Computer Vision", icon: "👁️",
+        subtitle: "Teaching machines to see — from pixels to understanding",
+        quests: [
+          {
+            id: "6-1", title: "Image Processing with OpenCV", xp: 20,
+            topics: "OpenCV basics, transformations, filters, edge detection, color spaces",
+            resources: [
+              { title: "FreeCodeCamp OpenCV Course", url: "https://www.youtube.com/watch?v=oXlwWbU8l2o", type: "video" },
+              { title: "Sentdex OpenCV with Python", url: "https://www.youtube.com/playlist?list=PLQVvvaa0QuDdttJXlLtAJxJetJcqmqlQq", type: "playlist" }
+            ]
+          },
+          {
+            id: "6-2", title: "Object Detection", xp: 30,
+            topics: "YOLO, SSD, R-CNN family, semantic segmentation, U-Net",
+            resources: [
+              { title: "Ultralytics YOLOv8 Docs", url: "https://docs.ultralytics.com/", type: "docs" },
+              { title: "Stanford CS231n (detection lectures)", url: "https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv", type: "playlist" }
+            ]
+          },
+          {
+            id: "6-3", title: "Vision Transformers & CLIP", xp: 25,
+            topics: "ViT, CLIP, multi-modal models, modern architectures",
+            resources: [
+              { title: "Yannic Kilcher - ViT Explained", url: "https://www.youtube.com/watch?v=TrdevFK_am4", type: "video" },
+              { title: "HF Vision Documentation", url: "https://huggingface.co/docs/transformers/tasks/image_classification", type: "docs" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 7, title: "Generative AI", icon: "✨",
+        subtitle: "LLMs, diffusion models, and the frontier of creation",
+        quests: [
+          {
+            id: "7-1", title: "Generative Models Overview", xp: 20,
+            topics: "GANs, VAEs, autoregressive models, diffusion models overview",
+            resources: [
+              { title: "StatQuest VAEs", url: "https://www.youtube.com/watch?v=9zKuYvjFFS8", type: "video" },
+              { title: "Sentdex GANs Tutorials", url: "https://www.youtube.com/playlist?list=PLQVvvaa0QuDdeMyHEYc0gxFpYwHY2Qfdh", type: "playlist" }
+            ]
+          },
+          {
+            id: "7-2", title: "Large Language Models (LLMs)", xp: 40,
+            topics: "GPT architecture, tokenization (BPE), pretraining, RLHF, scaling laws",
+            resources: [
+              { title: "Karpathy - Intro to LLMs", url: "https://www.youtube.com/watch?v=zjkBMFhNj_g", type: "video" },
+              { title: "Karpathy - Let's Build GPT", url: "https://www.youtube.com/watch?v=kCc8FmEb1nY", type: "video" },
+              { title: "Karpathy - GPT Tokenizer", url: "https://www.youtube.com/watch?v=zduSFxRajkE", type: "video" },
+              { title: "LLMs from Scratch (Raschka)", url: "https://github.com/rasbt/LLMs-from-scratch", type: "docs" }
+            ]
+          },
+          {
+            id: "7-3", title: "Diffusion Models", xp: 30,
+            topics: "DDPM, noise schedules, Stable Diffusion, latent diffusion, ControlNet",
+            resources: [
+              { title: "Hugging Face Diffusion Course", url: "https://huggingface.co/learn/diffusion-course", type: "course" },
+              { title: "Yannic Kilcher - DDPM Explained", url: "https://www.youtube.com/watch?v=W-O7AZNzbzQ", type: "video" },
+              { title: "Computerphile - Stable Diffusion", url: "https://www.youtube.com/watch?v=1CIpzeNxIhU", type: "video" }
+            ]
+          },
+          {
+            id: "7-4", title: "Fine-tuning LLMs", xp: 35,
+            topics: "LoRA, QLoRA, PEFT, instruction tuning, dataset prep",
+            resources: [
+              { title: "Hugging Face PEFT Docs", url: "https://huggingface.co/docs/peft", type: "docs" },
+              { title: "FreeCodeCamp Fine-tuning LLMs", url: "https://www.youtube.com/watch?v=eC6Hd1hFvos", type: "video" },
+              { title: "Sebastian Raschka Fine-tuning", url: "https://github.com/rasbt/LLMs-from-scratch", type: "docs" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 8, title: "Prompt Engineering", icon: "💬",
+        subtitle: "The art of communicating with AI — get the best outputs",
+        quests: [
+          {
+            id: "8-1", title: "Prompting Fundamentals", xp: 20,
+            topics: "Zero-shot, few-shot, system prompts, role prompting, temperature",
+            resources: [
+              { title: "Anthropic Prompt Engineering Guide", url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering", type: "docs" },
+              { title: "OpenAI Prompt Engineering Guide", url: "https://platform.openai.com/docs/guides/prompt-engineering", type: "docs" },
+              { title: "DeepLearning.AI Prompt Engineering", url: "https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/", type: "course" }
+            ]
+          },
+          {
+            id: "8-2", title: "Advanced Prompting", xp: 30,
+            topics: "Chain-of-thought, tree-of-thought, ReAct, self-consistency, JSON mode",
+            resources: [
+              { title: "Anthropic Cookbook", url: "https://github.com/anthropics/anthropic-cookbook", type: "docs" },
+              { title: "Prompt Engineering Guide", url: "https://www.promptingguide.ai/", type: "docs" }
+            ]
+          },
+          {
+            id: "8-3", title: "Evaluation & Iteration", xp: 25,
+            topics: "Evaluating LLM outputs, prompt testing, A/B testing prompts, edge cases",
+            resources: [
+              { title: "Anthropic Docs - Evaluations", url: "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering", type: "docs" },
+              { title: "DeepLearning.AI LLM Courses", url: "https://www.deeplearning.ai/short-courses/", type: "course" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 9, title: "RAG - Retrieval Augmented Generation", icon: "🔍",
+        subtitle: "Give LLMs access to your data — the bridge between AI and knowledge",
+        quests: [
+          {
+            id: "9-1", title: "Embeddings & Vector Databases", xp: 30,
+            topics: "Embeddings, sentence transformers, similarity search, Chroma, FAISS, Pinecone",
+            resources: [
+              { title: "FreeCodeCamp Vector Databases", url: "https://www.youtube.com/watch?v=dN0lsF2cvm4", type: "video" },
+              { title: "Sentence Transformers Docs", url: "https://huggingface.co/docs/sentence-transformers", type: "docs" },
+              { title: "ChromaDB Getting Started", url: "https://docs.trychroma.com/getting-started", type: "docs" }
+            ]
+          },
+          {
+            id: "9-2", title: "Building RAG Pipelines", xp: 35,
+            topics: "Document loading, chunking, retrieval, reranking, LangChain, LlamaIndex",
+            resources: [
+              { title: "LangChain RAG Tutorial", url: "https://python.langchain.com/docs/tutorials/rag/", type: "docs" },
+              { title: "LlamaIndex Documentation", url: "https://docs.llamaindex.ai/", type: "docs" },
+              { title: "FreeCodeCamp LangChain & RAG", url: "https://www.youtube.com/watch?v=lG7Uxts9SXs", type: "video" }
+            ]
+          },
+          {
+            id: "9-3", title: "Advanced RAG", xp: 35,
+            topics: "Hybrid search, query transformation, multi-hop retrieval, RAGAS evaluation",
+            resources: [
+              { title: "DeepLearning.AI Advanced Retrieval", url: "https://www.deeplearning.ai/short-courses/", type: "course" },
+              { title: "RAGAS Documentation", url: "https://docs.ragas.io/", type: "docs" },
+              { title: "Weaviate Blog (RAG patterns)", url: "https://weaviate.io/blog", type: "docs" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 10, title: "AI Agents & Tool Use", icon: "🕹️",
+        subtitle: "Autonomous AI systems that reason, plan, and take action",
+        quests: [
+          {
+            id: "10-1", title: "Agent Fundamentals", xp: 30,
+            topics: "ReAct pattern, planning/reasoning, tool calling, function calling APIs",
+            resources: [
+              { title: "Anthropic Tool Use Docs", url: "https://docs.anthropic.com/en/docs/build-with-claude/tool-use", type: "docs" },
+              { title: "Lilian Weng - LLM Agents (blog)", url: "https://lilianweng.github.io/posts/2023-06-23-agent/", type: "docs" },
+              { title: "DeepLearning.AI AI Agents", url: "https://www.deeplearning.ai/short-courses/", type: "course" }
+            ]
+          },
+          {
+            id: "10-2", title: "Agent Frameworks", xp: 35,
+            topics: "LangGraph, CrewAI, AutoGen, custom agent loops, state management",
+            resources: [
+              { title: "LangGraph Documentation", url: "https://langchain-ai.github.io/langgraph/", type: "docs" },
+              { title: "CrewAI Documentation", url: "https://docs.crewai.com/", type: "docs" },
+              { title: "Anthropic Claude SDK", url: "https://github.com/anthropics/anthropic-sdk-python", type: "docs" }
+            ]
+          },
+          {
+            id: "10-3", title: "Multi-Agent Systems", xp: 35,
+            topics: "Agent orchestration, delegation, shared memory, human-in-the-loop",
+            resources: [
+              { title: "Microsoft AutoGen", url: "https://microsoft.github.io/autogen/", type: "docs" },
+              { title: "DeepLearning.AI Multi-Agent", url: "https://www.deeplearning.ai/short-courses/", type: "course" }
+            ]
+          },
+          {
+            id: "10-4", title: "MCP (Model Context Protocol)", xp: 30,
+            topics: "MCP specification, building MCP servers, tool discovery, standardized interfaces",
+            resources: [
+              { title: "MCP Specification", url: "https://modelcontextprotocol.io/", type: "docs" },
+              { title: "Anthropic MCP Documentation", url: "https://docs.anthropic.com/en/docs/agents-and-tools/mcp", type: "docs" }
+            ]
+          }
+        ]
+      },
+      {
+        id: 11, title: "MLOps & Deployment", icon: "🚀",
+        subtitle: "Ship your AI to the real world — production-grade systems",
+        quests: [
+          {
+            id: "11-1", title: "Experiment Tracking", xp: 20,
+            topics: "MLflow, Weights & Biases, experiment logging, model registry",
+            resources: [
+              { title: "MLflow Official Tutorials", url: "https://mlflow.org/docs/latest/tutorials-and-examples/index.html", type: "docs" },
+              { title: "Weights & Biases Courses", url: "https://www.wandb.courses/", type: "course" },
+              { title: "FreeCodeCamp MLOps", url: "https://www.youtube.com/watch?v=Kvxaj6pHeVA", type: "video" }
+            ]
+          },
+          {
+            id: "11-2", title: "Model Serving & APIs", xp: 25,
+            topics: "FastAPI for ML, Docker basics, REST APIs, batch vs real-time inference",
+            resources: [
+              { title: "FastAPI Documentation", url: "https://fastapi.tiangolo.com/", type: "docs" },
+              { title: "FreeCodeCamp Docker", url: "https://www.youtube.com/watch?v=fqMOX6JJhGo", type: "video" },
+              { title: "Made With ML (free)", url: "https://madewithml.com/", type: "course" }
+            ]
+          },
+          {
+            id: "11-3", title: "Cloud Deployment", xp: 25,
+            topics: "Hugging Face Spaces, Gradio, Streamlit, free hosting options",
+            resources: [
+              { title: "Hugging Face Spaces", url: "https://huggingface.co/spaces", type: "tool" },
+              { title: "Gradio Documentation", url: "https://www.gradio.app/docs", type: "docs" },
+              { title: "Streamlit Documentation", url: "https://docs.streamlit.io/", type: "docs" }
+            ]
+          },
+          {
+            id: "11-4", title: "LLM Operations", xp: 30,
+            topics: "LLM evaluation, guardrails, monitoring, cost optimization, caching",
+            resources: [
+              { title: "Guardrails AI", url: "https://www.guardrailsai.com/docs", type: "docs" },
+              { title: "DeepLearning.AI LLMOps", url: "https://www.deeplearning.ai/short-courses/", type: "course" }
+            ]
+          }
+        ]
+      }
+    ];
+
+    // === LEVEL SYSTEM ===
+    const XP_THRESHOLDS = [0, 50, 150, 300, 500, 750, 1050, 1400, 1800, 2300, 2900, 3600];
+    const LEVEL_NAMES = [
+      "Curious Observer", "Data Dabbler", "Algorithm Apprentice",
+      "ML Practitioner", "Neural Navigator", "Deep Learning Knight",
+      "Transformer Sage", "GenAI Architect", "Agent Commander",
+      "ML Engineer", "AI Overlord", "The Singularity"
+    ];
+
+    // === STATE ===
+    let state = {
+      xp: 0,
+      level: 1,
+      completedQuests: [],
+      streak: { current: 0, lastDate: null, longest: 0 },
+      expandedLevels: []
+    };
+
+    // === PERSISTENCE ===
+    function saveState() {
+      localStorage.setItem('ai-quest-state', JSON.stringify(state));
+    }
+
+    function loadState() {
+      const saved = localStorage.getItem('ai-quest-state');
+      if (saved) {
+        state = { ...state, ...JSON.parse(saved) };
+      }
+    }
+
+    // === STREAK ===
+    function updateStreak() {
+      const today = new Date().toDateString();
+      if (state.streak.lastDate === today) return;
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      if (state.streak.lastDate === yesterday) {
+        state.streak.current++;
+      } else if (state.streak.lastDate !== today) {
+        state.streak.current = 1;
+      }
+      state.streak.lastDate = today;
+      state.streak.longest = Math.max(state.streak.longest, state.streak.current);
+      saveState();
+    }
+
+    // === XP & LEVELS ===
+    function addXP(amount) {
+      const oldLevel = state.level;
+      state.xp += amount;
+      while (state.level < XP_THRESHOLDS.length - 1 && state.xp >= XP_THRESHOLDS[state.level]) {
+        state.level++;
+      }
+      saveState();
+      showXPToast(amount);
+      if (state.level > oldLevel) {
+        setTimeout(() => showLevelUp(state.level), 600);
+      }
+    }
+
+    function removeXP(amount) {
+      state.xp = Math.max(0, state.xp - amount);
+      while (state.level > 1 && state.xp < XP_THRESHOLDS[state.level - 1]) {
+        state.level--;
+      }
+      saveState();
+    }
+
+    // === QUEST COMPLETION ===
+    function toggleQuest(questId) {
+      const quest = findQuest(questId);
+      if (!quest) return;
+
+      if (state.completedQuests.includes(questId)) {
+        state.completedQuests = state.completedQuests.filter(id => id !== questId);
+        removeXP(quest.xp);
+      } else {
+        state.completedQuests.push(questId);
+        addXP(quest.xp);
+        updateStreak();
+        triggerConfetti();
+      }
+      saveState();
+      renderAll();
+    }
+
+    function findQuest(questId) {
+      for (const level of LEVELS) {
+        for (const quest of level.quests) {
+          if (quest.id === questId) return quest;
+        }
+      }
+      return null;
+    }
+
+    // === UI RENDERING ===
+    function renderAll() {
+      renderHeader();
+      renderHero();
+      renderOverallProgress();
+      renderLevels();
+    }
+
+    function renderHeader() {
+      document.getElementById('header-level').textContent = `Lv ${state.level}`;
+      document.getElementById('header-title').textContent = LEVEL_NAMES[state.level - 1] || LEVEL_NAMES[LEVEL_NAMES.length - 1];
+
+      const currentThreshold = XP_THRESHOLDS[state.level - 1] || 0;
+      const nextThreshold = XP_THRESHOLDS[state.level] || XP_THRESHOLDS[XP_THRESHOLDS.length - 1];
+      const progress = ((state.xp - currentThreshold) / (nextThreshold - currentThreshold)) * 100;
+      document.getElementById('header-xp-bar').style.width = `${Math.min(progress, 100)}%`;
+      document.getElementById('header-xp-text').textContent = `${state.xp} / ${nextThreshold} XP`;
+
+      const streakBadge = document.getElementById('streak-badge');
+      document.getElementById('streak-num').textContent = state.streak.current;
+      if (state.streak.current >= 3) streakBadge.classList.add('active');
+      else streakBadge.classList.remove('active');
+
+      document.getElementById('mobile-streak').textContent = state.streak.current;
+      document.getElementById('mobile-xp').textContent = state.xp;
+      const totalQuests = LEVELS.reduce((sum, l) => sum + l.quests.length, 0);
+      const pct = Math.round((state.completedQuests.length / totalQuests) * 100);
+      document.getElementById('mobile-progress').textContent = pct;
+    }
+
+    function renderHero() {
+      const totalQuests = LEVELS.reduce((sum, l) => sum + l.quests.length, 0);
+      document.getElementById('stat-completed').textContent = state.completedQuests.length;
+      document.getElementById('stat-total').textContent = totalQuests;
+      document.getElementById('stat-xp').textContent = state.xp;
+      document.getElementById('stat-streak').textContent = state.streak.longest;
+    }
+
+    function renderOverallProgress() {
+      const totalQuests = LEVELS.reduce((sum, l) => sum + l.quests.length, 0);
+      const pct = Math.round((state.completedQuests.length / totalQuests) * 100);
+      document.getElementById('overall-pct').textContent = `${pct}%`;
+      document.getElementById('overall-bar-fill').style.width = `${pct}%`;
+    }
+
+    function renderLevels() {
+      const container = document.getElementById('levels-container');
+      container.innerHTML = LEVELS.map(level => {
+        const completedInLevel = level.quests.filter(q => state.completedQuests.includes(q.id)).length;
+        const totalInLevel = level.quests.length;
+        const allDone = completedInLevel === totalInLevel;
+        const isExpanded = state.expandedLevels.includes(level.id);
+
+        let statusClass = '';
+        if (allDone) statusClass = 'completed';
+        else if (completedInLevel > 0) statusClass = 'current';
+
+        return `
+          <div class="level-section ${statusClass} ${isExpanded ? 'expanded' : ''}" data-level="${level.id}">
+            <div class="level-header" onclick="toggleLevel(${level.id})">
+              <div class="level-header-left">
+                <div class="level-icon">${allDone ? '✅' : level.icon}</div>
+                <div>
+                  <div class="level-title">Level ${level.id}: ${level.title}</div>
+                  <div class="level-subtitle">${level.subtitle}</div>
+                </div>
+              </div>
+              <div class="level-header-right">
+                <span class="level-progress-mini">${completedInLevel}/${totalInLevel}</span>
+                <span class="chevron">▼</span>
+              </div>
+            </div>
+            <div class="quest-list">
+              ${level.quests.map(quest => renderQuest(quest)).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderQuest(quest) {
+      const isCompleted = state.completedQuests.includes(quest.id);
+      const resourceIcons = { video: '▶', playlist: '📺', course: '🎓', docs: '📖', tool: '🔧' };
+
+      return `
+        <div class="quest-item ${isCompleted ? 'completed' : ''}">
+          <div class="quest-header">
+            <div class="quest-checkbox" onclick="toggleQuest('${quest.id}')"></div>
+            <span class="quest-title">${quest.title}</span>
+            <span class="quest-xp">+${quest.xp} XP</span>
+          </div>
+          <div class="quest-topics">${quest.topics}</div>
+          <div class="quest-resources">
+            ${quest.resources.map(r => `
+              <a href="${r.url}" target="_blank" rel="noopener" class="resource-link">
+                <span class="icon">${resourceIcons[r.type] || '🔗'}</span>
+                ${r.title}
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // === INTERACTIONS ===
+    function toggleLevel(levelId) {
+      if (state.expandedLevels.includes(levelId)) {
+        state.expandedLevels = state.expandedLevels.filter(id => id !== levelId);
+      } else {
+        state.expandedLevels.push(levelId);
+      }
+      saveState();
+      renderLevels();
+    }
+
+    // === CELEBRATIONS ===
+    function triggerConfetti() {
+      const container = document.getElementById('confetti-container');
+      const colors = ['#7c3aed', '#06b6d4', '#f59e0b', '#10b981', '#ef4444', '#ec4899'];
+      for (let i = 0; i < 30; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 0.5 + 's';
+        piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        piece.style.width = (6 + Math.random() * 8) + 'px';
+        piece.style.height = (6 + Math.random() * 8) + 'px';
+        container.appendChild(piece);
+        setTimeout(() => piece.remove(), 4000);
+      }
+    }
+
+    function showXPToast(amount) {
+      const toast = document.createElement('div');
+      toast.className = 'xp-toast';
+      toast.textContent = `+${amount} XP`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2000);
+    }
+
+    function showLevelUp(newLevel) {
+      triggerConfetti();
+      triggerConfetti();
+      document.getElementById('modal-title').textContent = `⚡ Level ${newLevel}!`;
+      document.getElementById('modal-text').textContent = `You are now: ${LEVEL_NAMES[newLevel - 1]}`;
+      document.getElementById('level-up-modal').classList.add('show');
+    }
+
+    function closeModal() {
+      document.getElementById('level-up-modal').classList.remove('show');
+    }
+
+    function resetProgress() {
+      if (confirm('Are you sure? This will reset ALL your progress permanently.')) {
+        localStorage.removeItem('ai-quest-state');
+        state = { xp: 0, level: 1, completedQuests: [], streak: { current: 0, lastDate: null, longest: 0 }, expandedLevels: [] };
+        renderAll();
+      }
+    }
+
+    // === INIT ===
+    loadState();
+    renderAll();
+  </script>
+</body>
+</html>
